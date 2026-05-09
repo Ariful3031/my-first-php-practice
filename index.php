@@ -97,7 +97,7 @@ include 'config.php';
                         <td>'.$email.'</td>
                         <td>'.$address.'</td>
                         <td>
-                        <a href="#" class="btn btn-primary">Update</a>
+                        <a href="update.php?id='.$id.'" class="btn btn-primary">Update</a>
                         <a href="delete.php?id='.$id.'" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>';

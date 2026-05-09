@@ -7,20 +7,34 @@
  
 <?php
 
-    // $name = $_POST['name'];
-    // $email = $_POST['email'];
-    // $roll = $_POST['roll'];
-    // $class = $_POST['class'];
-    // $phone = $_POST['phone'];
-    // $address = $_POST['address'];
+    if(isset($_GET['id'])){
 
-    //   $query = "INSERT INTO students (name, roll, class, phone, email, address) VALUES ('$name', '$roll', '$class', '$phone' , '$email','$address')";
+      $id=$_GET['id'];
 
-    //   $createStudent = mysqli_query($connection , $query);
+        $query= "SELECT * FROM students WHERE id=$id";
 
-    // if($_SERVER['REQUEST_METHOD'] == 'POST'){}
+        $getSingleData= mysqli_query($connection, $query);
+
+
+        $data = mysqli_fetch_assoc($getSingleData);
+
+        $name = $data['name'];
+        $roll = $data['roll'];
+        $class = $data['class'];
+        $phone = $data['phone'];
+        $email = $data['email'];
+        $address = $data['address'];
+
+
+    }
+
+  
+
+ 
 
     if(isset($_POST['submit'])){
+
+        $id=$_GET['id'];
 
         $name = $_POST['name'];
         $email = $_POST['email'];
@@ -29,8 +43,7 @@
         $phone = $_POST["phone"];
         $address = $_POST["address"];
 
-      $query = "INSERT INTO students (name, roll, class, phone, email, address) 
-      VALUES ('$name', '$roll', '$class', '$phone' , '$email','$address')";
+      $query = "UPDATE students SET name='$name', roll='$roll' , class= '$class', email='$email', address='$address' WHERE id=$id";
 
       $insertStudent = mysqli_query($connection , $query);
   
@@ -44,10 +57,6 @@
       }
 
     }
-
-  
-
-// }
 
 ?>
  
@@ -93,40 +102,38 @@
        </div>
             <div class="mb-3">
               <label for="name" class="form-label">Name *</label>
-              <input type="text" class="form-control" placeholder="Enter Student Name" name="name" id="name" value="" required >
+              <input type="text" class="form-control" placeholder="Enter Student Name" name="name" id="name" value="<?php echo $name ?>" required >
             </div>
 
              <div class="mb-3">
               <label for="email" class="form-label">Email *</label>
-              <input type="email" class="form-control" placeholder="Enter Student Email" name="email" id="email" value="" required>
+              <input type="email" class="form-control" placeholder="Enter Student Email" name="email" id="email" value="<?php echo $email ?>" required>
             </div>
 
             <div class="mb-3">
               <label for="roll" class="form-label">Roll *</label>
-              <input type="number" class="form-control" placeholder="Enter Student Roll" name="roll" id="roll" value="" required >
+              <input type="number" class="form-control" placeholder="Enter Student Roll" name="roll" id="roll" value="<?php echo $roll ?>" required >
             </div>
 
             <div class="mb-3">
               <label for="class" class="form-label">Class *</label>
-              <input type="number" class="form-control" placeholder="Enter Student Class" name="class" id="class" value="" required >
+              <input type="number" class="form-control" placeholder="Enter Student Class" name="class" id="class" value="<?php echo $class ?>" required >
             </div>
 
 
             <div class="mb-3">
               <label for="phone" class="form-label">Phone Number *</label>
-              <input type="number" class="form-control" placeholder="Enter Student Number" name="phone" id="phone" value="" required >
+              <input type="number" class="form-control" placeholder="Enter Student Number" name="phone" id="phone" value="<?php echo $phone ?>" required >
             </div>
 
              <div class="mb-3">
               <label for="address" class="form-label">Address *</label>
-              <input type="text" class="form-control" placeholder="Enter Student Address" name="address" id="address" value="" required >
+              <textarea class="form-control" name="address" id="address" required><?php echo $address ?></textarea>
+              <!-- <input type="text" class="form-control" placeholder="Enter Student Address" name="address" id="address" value="<?php echo $address ?>" required > -->
             </div>
 
-            <!-- <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div> -->
-            <button type="submit" name="submit" class="btn btn-primary">Create</button>
+       
+            <button type="submit" name="submit" class="btn btn-primary">Update</button>
         </form>
     </div>
 
